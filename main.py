@@ -2,7 +2,7 @@ from datetime import datetime
 from json import load, dump
 
 
-JSON_PATH = "test.json"
+JSON_PATH = "example.json"
 
 # Print Current Date
 current_time = datetime.now()
