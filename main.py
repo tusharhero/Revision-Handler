@@ -43,6 +43,39 @@ def detailed_view():
         print()
 
 
+def start_editing():
+    print(f"    Select subject:")
+    for subject in data:
+        print(f"    {subject.upper()}")
+
+    print()
+    subject = input("   :").lower()
+    if subject not in data.keys():
+        return
+
+    chapters = data[subject]
+    print(f"    Select chapter:")
+    for chapter in chapters:
+        print(f"    {chapter.lower()}")
+    print()
+
+    chapter = input("   :").lower()
+    if chapter not in chapters.keys():
+        return
+
+    subtopics = chapters[chapter]
+    print(f"")
+    for subtopic in subtopics:
+        print(f"    {subtopic}")
+
+    subtopic = input("  :")
+    if subtopic not in subtopics.keys():
+        return
+
+    new_date = input("  date: ")
+    data[subject][chapter][subtopic] = new_date
+
+
 with open(JSON_PATH) as f:
     data = load(f)
 
@@ -65,5 +98,10 @@ while running:
     elif cmd in ["subject", "subjects", "s"]:
         for subject in data:
             print(subject.upper())
+    elif cmd in ["edit", "e", "change"]:
+        start_editing()
 
 print(data)
+
+with open(JSON_PATH, "w") as f:
+    dump(data, f)
