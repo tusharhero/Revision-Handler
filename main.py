@@ -73,6 +73,10 @@ def start_editing():
         return
 
     new_date = input("  date: ")
+
+    if new_date.lower() == "today":
+        new_date = current_time.strftime("%m/%d/%Y")
+
     data[subject][chapter][subtopic] = new_date
 
 
@@ -100,6 +104,16 @@ while running:
             print(subject.upper())
     elif cmd in ["edit", "e", "change"]:
         start_editing()
+    elif cmd in ["h", "help"]:
+        print(
+            """
+        [exit, quit, q, close] - close the program
+        [detailed view, dv] - gets detailed view of every subject and chapters
+        [subject, subjects, s] - displays all subject
+        [editing, e, chage] - edit a date in subject
+        [h, help] - displays this message
+        """
+        )
 
 print(data)
 
